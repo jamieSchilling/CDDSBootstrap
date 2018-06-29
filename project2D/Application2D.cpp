@@ -3,6 +3,12 @@
 #include "Font.h"
 #include "Input.h"
 
+int moveY = 0;
+int moveX = 0;
+float rotate = 0;
+
+
+
 Application2D::Application2D() {
 
 }
@@ -20,6 +26,8 @@ bool Application2D::startup() {
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 	
+	m_shipX = 600;
+	m_shipY = 400;
 	m_cameraX = 0;
 	m_cameraY = 0;
 	m_timer = 0;
@@ -55,6 +63,45 @@ void Application2D::update(float deltaTime) {
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
 		m_cameraX += 500.0f * deltaTime;
 
+	moveY = 0;
+	moveX = 0;
+
+	// use arrow keys to move the ship
+	if (input->isKeyDown(aie::INPUT_KEY_UP))
+	{
+		moveY = 500.0f;
+		rotate = 0;
+	}
+	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
+	{
+		moveY = -500.0f;
+		rotate = 3.14;
+	}
+	if (input->isKeyDown(aie::INPUT_KEY_LEFT))
+	{
+		moveX = -500.0f;
+		rotate = 1.57;
+	}
+	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
+	{
+		moveX = 500.0f;
+		rotate = 4.7;
+	}
+
+	m_shipX += (moveX * deltaTime);
+	m_shipY += (moveY * deltaTime);
+	
+	if (moveX && moveY >= 0)
+	{
+		rotate = 0.785398;
+	}
+	if (moveX && moveY <= 0)
+		
+	if (moveX >= 0 && moveY <= 0)
+		
+	if (moveX <= 0 && moveY >= 0)
+		
+
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
@@ -75,9 +122,9 @@ void Application2D::draw() {
 	m_2dRenderer->setUVRect(int(m_timer) % 8 / 8.0f, 0, 1.f / 8, 1.f / 8);
 	m_2dRenderer->drawSprite(m_texture, 200, 200, 100, 100);
 
-	// demonstrate spinning sprite
+	// demonstrate spinning ship sprite
 	m_2dRenderer->setUVRect(0,0,1,1);
-	m_2dRenderer->drawSprite(m_shipTexture, 600, 400, 0, 0, 10*m_timer, 1);
+	m_2dRenderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, 0 + rotate, 1);
 
 	// draw a thin line
 	m_2dRenderer->drawLine(300, 300, 600, 400, 2, 1);
