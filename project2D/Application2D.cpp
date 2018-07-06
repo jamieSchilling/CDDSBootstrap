@@ -43,7 +43,7 @@ bool Application2D::startup() {
 void Application2D::shutdown() {
 
 	delete m_font;
-	delete m_texture;
+	delete m_rock;
 	delete m_shipTexture;
 	delete m_2dRenderer;
 }
@@ -118,6 +118,22 @@ void Application2D::update(float deltaTime) {
 
 	m_shipX += (moveX * deltaTime);
 	m_shipY += (moveY * deltaTime);
+	if (m_shipX > 3000.0f)
+	{
+		m_shipX = 2999.0f;
+	}
+	if (m_shipX < -3000.0f)
+	{
+		m_shipX = -2999.0f;
+	}
+	if (m_shipY > 3000.0f)
+	{
+		m_shipY = 2999.0f;
+	}
+	if (m_shipY < -3000.0f)
+	{
+		m_shipY = -2999.0f;
+	}
 	m_bulletX += (bulletX * deltaTime);
 	m_bulletY += (bulletY * deltaTime);
 
@@ -175,13 +191,14 @@ void Application2D::draw() {
 	m_2dRenderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, 0 + rotate, 1);
 
 	// rock
-	m_2dRenderer->drawSprite(m_rock, k, l, 50, 50, 0, 1);
+	m_2dRenderer->drawSprite(m_rock, k, l, 50, 50, 0, 10);
 
 	// create bullet
 	m_2dRenderer->setRenderColour(2, 0, 0.5, 1);
 	m_2dRenderer->drawCircle(m_bulletX, m_bulletY, 10, 10);
 
 	// background
+	m_2dRenderer->setRenderColour(1, 0.2, 0.7, 1);
 	m_2dRenderer->drawSprite(m_rock, k, l, 10000, 10000, 0, 20);
 
 	// score
