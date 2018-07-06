@@ -1,5 +1,5 @@
-	CDDS Version-controlled Game Project
-
+      ==CDDS Version-controlled Game Project==
+         	    play testing
 
  * is ship able to fly in all 8 directions.
  
@@ -11,3 +11,5 @@
 
  * camera should be centered on the ship sprite.
 
+ * ship should be confined in the play area.
+ 
