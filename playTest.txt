@@ -1,0 +1,13 @@
+	CDDS Version-controlled Game Project
+
+
+ * is ship able to fly in all 8 directions.
+ 
+ * score should iterate apon hitting an asteroid.
+
+ * asteroid respawns in random location when destroyed.
+ 
+ * bullet fires in direction of the ship.
+
+ * camera should be centered on the ship sprite.
+

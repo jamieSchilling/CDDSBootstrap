@@ -13,13 +13,10 @@ float k = 400;
 float l = 400;
 int score = 0;
 
-
 Application2D::Application2D() {
-
 }
 
 Application2D::~Application2D() {
-
 }
 
 bool Application2D::startup() {
@@ -44,13 +41,12 @@ bool Application2D::startup() {
 }
 
 void Application2D::shutdown() {
-	
+
 	delete m_font;
 	delete m_texture;
 	delete m_shipTexture;
 	delete m_2dRenderer;
 }
-
 
 void Application2D::update(float deltaTime) {
 
@@ -155,20 +151,16 @@ void Application2D::bullet()
 		bulletX = 0;
 		bulletX -= 2000.0f;
 	}
-	else if (rotate <4.4 && rotate >4.9)//right
+	else if (rotate <5 && rotate >4)//right
 	{
 		bulletY = 0;
 		bulletX = 0;
 		bulletX += 2000.0f;
 	}
-	else if (rotate <0.8 && rotate >0.6)
-	{
-		bulletY += 2000.0f;
-		bulletX += 2000.0f;
-	}
 }
 
 void Application2D::draw() {
+
 	// wipe the screen to the background colour
 	clearScreen();
 
@@ -189,6 +181,9 @@ void Application2D::draw() {
 	m_2dRenderer->setRenderColour(2, 0, 0.5, 1);
 	m_2dRenderer->drawCircle(m_bulletX, m_bulletY, 10, 10);
 
+	// background
+	m_2dRenderer->drawSprite(m_rock, k, l, 10000, 10000, 0, 20);
+
 	// score
 	m_2dRenderer->setRenderColour(1, 1, 0, 1);
 	char points[32];
@@ -204,5 +199,3 @@ void Application2D::draw() {
 	// done drawing sprites
 	m_2dRenderer->end();
 }
-
-
